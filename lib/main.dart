@@ -1,4 +1,4 @@
-import 'package:ble_sdk_connection/Screens/home_screen.dart';
+import 'package:ble_sdk_connection/Screens/main_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
