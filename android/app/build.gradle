@@ -60,12 +60,12 @@ android {
     }
 
     dependencies {
-    implementation fileTree(dir: "libs", include: ["*.aar"])
-    implementation files('libs/ICDeviceManager.aar')
-    implementation 'androidx.core:core-ktx:1.6.0'  // to ensure necessary dependencies are present
+    // implementation fileTree(dir: "libs", include: ["*.aar"])
+    // implementation files('libs/ICDeviceManager.aar')
+    // implementation 'androidx.core:core-ktx:1.6.0'  // to ensure necessary dependencies are present
 
 
-//    implementation(name: 'ICDeviceManager', ext: 'aar')
+   implementation(name: 'ICDeviceManager', ext: 'aar')
 }
 
    
