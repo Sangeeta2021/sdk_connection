@@ -1,4 +1,3 @@
-// lib/services/weight_data_service.dart
 import 'package:flutter/services.dart';
 
 class WeightDataService {

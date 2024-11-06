@@ -3,10 +3,7 @@ buildscript {
     repositories {
         google()
         mavenCentral()
-        flatDir {
-            dirs 'app/libs'
-            // dirs 'libs' // for change
-        }
+        
     }
 
     dependencies {
@@ -22,6 +19,10 @@ allprojects {
     repositories {
         google()
         mavenCentral()
+        flatDir {
+            dirs 'app/libs'
+            // dirs 'libs' // for change
+        }
     }
 }
 

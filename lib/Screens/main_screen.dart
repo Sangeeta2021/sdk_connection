@@ -85,6 +85,8 @@
 // }
 
 
+import 'package:ble_sdk_connection/utils/colors.dart';
+import 'package:ble_sdk_connection/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -150,30 +152,51 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("BLE Weight Machine")),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Text("Weight Data: $_weightData", style: TextStyle(fontSize: 24)),
-          ElevatedButton(
-            onPressed: _startScan,
-            child: Text("Start Scan"),
-          ),
-          Expanded(
-            child: ListView.builder(
-              itemCount: _availableDevices.length,
-              itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text(_availableDevices[index]),
-                  trailing: ElevatedButton(
-                    onPressed: () => _connectToDevice(_availableDevices[index]),
-                    child: Text("Connect"),
-                  ),
-                );
-              },
+      backgroundColor: bgColor,
+      appBar: AppBar(
+        centerTitle: true,
+        backgroundColor: themeColor,
+
+        title: Text("BLE Weight Tracker", style: appBarTitleStyle,)),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(vertical:20,horizontal: 16 ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text("Weight Data: $_weightData", style: blackTitleStyle),
+            SizedBox(height: 20,),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: themeColor
+              ),
+              onPressed: _startScan,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 4,horizontal: 12),
+                child: Text("Start Scan", style: buttonTextStyle,),
+              ),
             ),
-          ),
-        ],
+            Expanded(
+              child: ListView.builder(
+                itemCount: _availableDevices.length,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 8),
+                    child: ListTile(
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12),),
+                      tileColor: wColor,
+                      title: Text(_availableDevices[index]),
+                      trailing: ElevatedButton(
+                        style: ElevatedButton.styleFrom(backgroundColor: themeColor),
+                        onPressed: () => _connectToDevice(_availableDevices[index]),
+                        child: Text("Connect", style: buttonTextStyle,),
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
