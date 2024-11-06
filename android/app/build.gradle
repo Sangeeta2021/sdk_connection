@@ -82,6 +82,8 @@ flutter {
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.aar"])
-    implementation(name: 'ICDeviceManager', ext: 'aar')
+    implementation files('libs/ICDeviceManager.aar')
+
+//    implementation(name: 'ICDeviceManager', ext: 'aar')
 }
 

@@ -4,13 +4,16 @@ buildscript {
         google()
         mavenCentral()
         flatDir {
-            dirs 'libs'
+            dirs 'app/libs'
+            // dirs 'libs' // for change
         }
     }
 
     dependencies {
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        // implementation(name: 'ICDeviceManager', ext: 'aar')
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.7.10"
+        classpath "com.android.tools.build:gradle:7.0.4"
+//        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+
 
     }
 }

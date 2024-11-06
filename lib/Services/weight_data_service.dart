@@ -4,9 +4,6 @@ import 'package:flutter/services.dart';
 class WeightDataService {
   static const platform = MethodChannel('com.example.weight_machine/data');
 
-  void initialize() {
-    // Initialize if needed
-  }
 
   void startWeightDataListener(Function(String) onDataReceived) {
     platform.setMethodCallHandler((call) async {
