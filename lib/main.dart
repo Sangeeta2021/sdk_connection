@@ -1,3 +1,4 @@
+import 'package:ble_sdk_connection/Screens/home2.dart';
 import 'package:ble_sdk_connection/Screens/main_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Colors.purple
       ),
-      home: MainScreen(),
+      home: Home2(),
     );
   }
 }

@@ -1,4 +1,3 @@
-
 // import 'package:ble_sdk_connection/utils/colors.dart';
 // import 'package:ble_sdk_connection/utils/constants.dart';
 // import 'package:flutter/material.dart';
@@ -161,11 +160,13 @@ class _MainScreenState extends State<MainScreen> {
   // Connect to a selected device
   Future<void> _connectToDevice(String deviceAddress) async {
     try {
-      await platform.invokeMethod('connectDevice', {'deviceAddress': deviceAddress});
+      await platform
+          .invokeMethod('connectDevice', {'deviceAddress': deviceAddress});
     } on PlatformException catch (e) {
       print("Failed to connect: ${e.message}");
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -173,19 +174,23 @@ class _MainScreenState extends State<MainScreen> {
       appBar: AppBar(
         backgroundColor: themeColor,
         centerTitle: true,
-        title: Text('Bluetooth Device Scanner', style: appBarTitleStyle,)),
+        title: Text(
+          'Bluetooth Device Scanner',
+          style: appBarTitleStyle,
+        ),
+      ),
       body: ListView.builder(
         itemCount: devices.length,
         itemBuilder: (context, index) {
           return ListTile(
             tileColor: themeColor,
-            title: Text(devices[index].name),
-            subtitle: Text(devices[index].address),
+            title: Text(devices[index].name, style: blackTitleStyle,),
+            subtitle: Text(devices[index].address, style: blackContenteStyle,),
             trailing: ElevatedButton(
               onPressed: () {
                 _connectToDevice(devices[index].address);
               },
-              child: Text("Connect"),
+              child: Text("Connect",style: blackTitleStyle,),
             ),
           );
         },
