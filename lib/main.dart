@@ -1,4 +1,4 @@
-import 'package:ble_sdk_connection/Screens/home3.dart';
+import 'package:ble_sdk_connection/Screens/home4.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Colors.purple
       ),
-      home: Home3(),
+      home: Home4(),
     );
   }
 }
