@@ -538,6 +538,70 @@
 
 
 //********************************************Code 2.3************************/
+// package com.example.ble_sdk_connection;
+
+// import androidx.annotation.NonNull;
+// import io.flutter.embedding.android.FlutterActivity;
+// import io.flutter.embedding.engine.FlutterEngine;
+// import io.flutter.plugin.common.MethodChannel;
+// import android.bluetooth.BluetoothAdapter;
+// import android.bluetooth.BluetoothDevice;
+// import android.content.Intent;
+// import java.util.Set;
+
+// public class MainActivity extends FlutterActivity {
+//     private static final String CHANNEL = "com.example.ble_sdk_connection/ble";
+//     private BluetoothAdapter bluetoothAdapter;
+
+//     @Override
+//     public void configureFlutterEngine(@NonNull FlutterEngine flutterEngine) {
+//         super.configureFlutterEngine(flutterEngine);
+        
+//         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+
+//         new MethodChannel(flutterEngine.getDartExecutor().getBinaryMessenger(), CHANNEL)
+//             .setMethodCallHandler(
+//                 (call, result) -> {
+//                     if (call.method.equals("startScan")) {
+//                         startBluetoothScan(result);
+//                     } else if (call.method.equals("connectToDevice")) {
+//                         String deviceAddress = call.argument("address");
+//                         connectToDevice(deviceAddress, result);
+//                     } else {
+//                         result.notImplemented();
+//                     }
+//                 }
+//             );
+//     }
+
+//     private void startBluetoothScan(MethodChannel.Result result) {
+//         if (bluetoothAdapter == null || !bluetoothAdapter.isEnabled()) {
+//             result.error("UNAVAILABLE", "Bluetooth is not available or enabled.", null);
+//             return;
+//         }
+        
+//         Set<BluetoothDevice> pairedDevices = bluetoothAdapter.getBondedDevices();
+//         StringBuilder devicesList = new StringBuilder();
+//         for (BluetoothDevice device : pairedDevices) {
+//             devicesList.append(device.getName()).append(" (").append(device.getAddress()).append(")\n");
+//         }
+//         result.success(devicesList.toString());
+//     }
+
+//     private void connectToDevice(String deviceAddress, MethodChannel.Result result) {
+//         BluetoothDevice device = bluetoothAdapter.getRemoteDevice(deviceAddress);
+//         if (device != null) {
+//             // Implement connection logic for BLE or Bluetooth classic device here
+//             result.success("Connected to " + device.getName());
+//         } else {
+//             result.error("ERROR", "Device not found.", null);
+//         }
+//     }
+// }
+
+
+
+//***************************************************Handle permission for Android 12 & above*************************/
 package com.example.ble_sdk_connection;
 
 import androidx.annotation.NonNull;
@@ -547,7 +611,10 @@ import io.flutter.plugin.common.MethodChannel;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.Intent;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class MainActivity extends FlutterActivity {
     private static final String CHANNEL = "com.example.ble_sdk_connection/ble";
@@ -556,22 +623,20 @@ public class MainActivity extends FlutterActivity {
     @Override
     public void configureFlutterEngine(@NonNull FlutterEngine flutterEngine) {
         super.configureFlutterEngine(flutterEngine);
-        
+
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
         new MethodChannel(flutterEngine.getDartExecutor().getBinaryMessenger(), CHANNEL)
-            .setMethodCallHandler(
-                (call, result) -> {
-                    if (call.method.equals("startScan")) {
-                        startBluetoothScan(result);
-                    } else if (call.method.equals("connectToDevice")) {
-                        String deviceAddress = call.argument("address");
-                        connectToDevice(deviceAddress, result);
-                    } else {
-                        result.notImplemented();
-                    }
+            .setMethodCallHandler((call, result) -> {
+                if (call.method.equals("startScan")) {
+                    startBluetoothScan(result);
+                } else if (call.method.equals("connectToDevice")) {
+                    String deviceAddress = call.argument("deviceAddress");
+                    connectToDevice(deviceAddress, result);
+                } else {
+                    result.notImplemented();
                 }
-            );
+            });
     }
 
     private void startBluetoothScan(MethodChannel.Result result) {
@@ -579,19 +644,21 @@ public class MainActivity extends FlutterActivity {
             result.error("UNAVAILABLE", "Bluetooth is not available or enabled.", null);
             return;
         }
-        
-        Set<BluetoothDevice> pairedDevices = bluetoothAdapter.getBondedDevices();
-        StringBuilder devicesList = new StringBuilder();
-        for (BluetoothDevice device : pairedDevices) {
-            devicesList.append(device.getName()).append(" (").append(device.getAddress()).append(")\n");
+
+        List<Map<String, String>> devicesList = new ArrayList<>();
+        for (BluetoothDevice device : bluetoothAdapter.getBondedDevices()) {
+            Map<String, String> deviceInfo = new HashMap<>();
+            deviceInfo.put("name", device.getName());
+            deviceInfo.put("address", device.getAddress());
+            devicesList.add(deviceInfo);
         }
-        result.success(devicesList.toString());
+        result.success(devicesList);
     }
 
     private void connectToDevice(String deviceAddress, MethodChannel.Result result) {
         BluetoothDevice device = bluetoothAdapter.getRemoteDevice(deviceAddress);
         if (device != null) {
-            // Implement connection logic for BLE or Bluetooth classic device here
+            // Implement your BLE connection logic here if required.
             result.success("Connected to " + device.getName());
         } else {
             result.error("ERROR", "Device not found.", null);

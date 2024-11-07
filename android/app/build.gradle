@@ -56,16 +56,30 @@ android {
             // TODO: Add your own signing config for the release build.
             // Signing with the debug keys for now, so `flutter run --release` works.
             signingConfig signingConfigs.debug
+            minifyEnabled true
+            shrinkResources true
+
+            // Use ProGuard rules
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
 
+    repositories {
+        flatDir {
+            dirs 'libs'  // This tells Gradle to look for .aar files in the libs directory
+    }
+}
+
+
+    //  flatDir {
+    //         dirs 'app/libs'
+    //         // dirs 'libs' // for change
+    //     }
+
     dependencies {
-    // implementation fileTree(dir: "libs", include: ["*.aar"])
-    // implementation files('libs/ICDeviceManager.aar')
+    implementation files('libs/ICDeviceManager.aar')
+    implementation fileTree(dir: "libs", include: ["*.aar"])
     // implementation 'androidx.core:core-ktx:1.6.0'  // to ensure necessary dependencies are present
-
-
-   implementation(name: 'ICDeviceManager', ext: 'aar')
 }
 
    
