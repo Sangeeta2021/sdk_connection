@@ -142,7 +142,7 @@ class _HomeScreen4State extends State<HomeScreen4> {
   @override
   void initState() {
     super.initState();
-    _requestPermissions(); // Request permissions at the start
+    _requestPermissions(); // Requesting permissions at the start
   }
 
   // Request location and Bluetooth permissions
