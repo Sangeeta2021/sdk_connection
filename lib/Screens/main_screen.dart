@@ -175,7 +175,7 @@ class _MainScreenState extends State<MainScreen> {
         backgroundColor: themeColor,
         centerTitle: true,
         title: Text(
-          'Bluetooth Device Scanner',
+          'BLE SDK Connection Method 1',
           style: appBarTitleStyle,
         ),
       ),

@@ -43,7 +43,7 @@ class _Home3State extends State<Home3> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Bluetooth Device Scanner'),
+        title: const Text('BLE SDK Connection Method 1b'),
         centerTitle: true,
       ),
       body: ListView.builder(

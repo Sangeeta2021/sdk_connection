@@ -55,7 +55,7 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Text('Scan for Devices'),
             ),
             ElevatedButton(
-              onPressed: () => connectToDevice('B4:56:5D:5E:82:C8'), // Example MAC
+              onPressed: () => connectToDevice('B4:56:5D:5E:82:C8'), // device MAC
               child: Text('Connect Device'),
             ),
           ],

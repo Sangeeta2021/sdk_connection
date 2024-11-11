@@ -49,7 +49,7 @@ class _Home2State extends State<Home2> {
       appBar: AppBar(
         backgroundColor: themeColor,
         centerTitle: true,
-        title: Text('BLE Connection',style: appBarTitleStyle,),
+        title: Text('BLE SDK Connection Method 1a',style: appBarTitleStyle,),
       ),
       body: ListView.builder(
         itemCount: _devices.length,
