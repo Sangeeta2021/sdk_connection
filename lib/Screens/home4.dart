@@ -118,7 +118,6 @@
 //   }
 // }
 
-
 //*********************Updated code with location permission***************************
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
@@ -220,6 +219,7 @@ class _HomeScreen4State extends State<HomeScreen4> {
       connectedDevice = null;
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -231,20 +231,30 @@ class _HomeScreen4State extends State<HomeScreen4> {
       body: Column(
         children: [
           Expanded(
-            child: ListView.builder(
-              itemCount: devicesList.length,
-              itemBuilder: (context, index) {
-                return ListTile(
-                  tileColor: themeColor,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                  title: Text(devicesList[index].name, style: blackTitleStyle),
-                  subtitle: Text(devicesList[index].id.toString(), style: blackContenteStyle),
-                  onTap: () {
-                    _connectToDevice(devicesList[index]);
-                  },
-                );
-              },
-            ),
+            child: devicesList.isNotEmpty
+                ? ListView.builder(
+                    itemCount: devicesList.length,
+                    itemBuilder: (context, index) {
+                      return ListTile(
+                        tileColor: themeColor,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8)),
+                        title: Text(devicesList[index].name,
+                            style: blackTitleStyle),
+                        subtitle: Text(devicesList[index].id.toString(),
+                            style: blackContenteStyle),
+                        onTap: () {
+                          _connectToDevice(devicesList[index]);
+                        },
+                      );
+                    },
+                  )
+                : Center(
+                    child: Text(
+                      "No device found",
+                      style: blackContenteStyle,
+                    ),
+                  ),
           ),
           if (connectedDevice != null)
             ElevatedButton(
